@@ -1,0 +1,2 @@
+insert into CUSTOMER_DETAILS(customerid, username, password, firstname, lastname, email, address, phnum) values(1001, 'admin', 'admin', 'Admin', 'System', 'admin@snsystems.com', 'US', 1234567890 );
+insert into CUSTOMER_DETAILS(customerid, username, password, firstname, lastname, email, address, phnum) values(1002, 'abhijit', 'abhijit', 'abhijit', 'P', 'abhijit@isa.com', 'FR', 0123456789 );
