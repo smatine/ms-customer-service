@@ -13,6 +13,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.support.SpringBootServletInitializer;
+import org.springframework.cloud.sleuth.Tracer;
 import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -39,10 +40,17 @@ import com.sg.microservices.customer.service.ICustomerService;
 public class CustomerServiceController   extends SpringBootServletInitializer {
 
 private static final Logger LOGGER = LoggerFactory.getLogger(CustomerServiceController.class);
+
+private static final Logger eslogger = LoggerFactory.getLogger("es-logger");
+
 String customlogger ="ADMS Loger::::";
 
 	@Autowired
 	private ICustomerService customerService;
+	
+	@Autowired
+	Tracer tracer;
+	
     private static final String signingKey = "signingKey";
  	
 	@Produces(MediaType.APPLICATION_JSON)
@@ -102,6 +110,11 @@ String customlogger ="ADMS Loger::::";
 	@RequestMapping(value="/test" , method = RequestMethod.GET)
 	@CrossOrigin
 	public String testService(){
+		
+		eslogger.info("Inside Customer service Test Method");
+		
+		eslogger.info("Correlation_id is "  +  tracer.getCurrentSpan().traceIdString());
+		
 		return "cutomer Service Sucess";
 	}
 	
